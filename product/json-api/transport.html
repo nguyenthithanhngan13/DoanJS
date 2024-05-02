@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Vận chuyển</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,6 +27,13 @@
 </head>
 
 <body>
+  <style>
+    td img {
+      width: 200px;
+
+      object-fit: cover;
+    }
+  </style>
   <header class="header">
 
     <div class="header-main">
@@ -63,11 +70,6 @@
     </div>
   </header>
   <div class="container">
-    <!-- <div class="arrow-steps clearfix">
-    <div class="step done"> <span> <a href="index.php?quanly=giohang">Giỏ hàng</a></span> </div>
-    <div class="step current"> <span><a href="index.php?quanly=vanchuyen">Vận chuyển</a></span> </div>
-    <div class="step"> <span>Thanh toán<span> </div>
-  </div> -->
     <div class="formvanchuyen">
       <div class="vanchuyen">
         <form action="" autocomplete="off" method="POST">
@@ -93,17 +95,143 @@
     </div>
     <table style="width:100%; text-align: center;border-collapse: collapse;" border="1">
       <tr>
-        <th>Id</th>
-        <th>Tên Sản Phẩm</th>
-        <th>Hình ảnh</th>
-        <th>Thương hiệu</th>
-        <th>Số lượng</th>
-        <th>Giá</th>
-        <th>Thành tiền</th>
-
+        <thead>
+          <th>Sản Phẩm</th>
+          <th>Tên</th>
+          <th>Thương hiệu</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Thành tiền</th>
       </tr>
+      </thead>
+      <tbody id="cart-items"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">Tổng tiền:</td>
+          <!-- <td id="total-price"></td> -->
+        </tr>
+      </tfoot>
     </table>
+    <button id="paymentButton" class="transport-button">Thanh toán</button>
+    <script>
+      // Get the cart from localStorage
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // Get the table body element to populate the cart items
+      const cartItemsBody = document.getElementById("cart-items");
+
+      //Function to render the cart items
+      function renderCartItems() {
+        cartItemsBody.innerHTML = "";
+
+        cart.forEach((product, index) => {
+          const row = document.createElement("tr");
+          const productImgCell = document.createElement("td");
+          const productImg = document.createElement("img");
+          productImg.src = product.preview;
+          productImg.alt = product.name;
+          productImgCell.appendChild(productImg);
+          row.appendChild(productImgCell);
+
+          const productNameCell = document.createElement("td");
+          productNameCell.textContent = product.name;
+          row.appendChild(productNameCell);
+
+          const productBrandCell = document.createElement("td");
+          productBrandCell.textContent = product.brand;
+          row.appendChild(productBrandCell);
+
+          const productPriceCell = document.createElement("td");
+          productPriceCell.textContent = product.price;
+          row.appendChild(productPriceCell);
+
+          const quantityCell = document.createElement("td");
+          const quantityWrapper = document.createElement("div");
+          quantityWrapper.classList.add("quantity-wrapper");
+
+          const quantityText = document.createElement("span");
+          quantityText.textContent = product.quantity;
+          quantityWrapper.appendChild(quantityText);
+
+          quantityCell.appendChild(quantityWrapper);
+          row.appendChild(quantityCell);
+
+          cartItemsBody.appendChild(row);
+        });
+
+        // Update the cart badge with the total number of products
+        const cartBadge = document.getElementById("badge");
+        cartBadge.textContent = cart.length.toString();
+      }
+
+      // Function to handle the checkout button click
+      function handleCheckout() {
+        // Perform the checkout logic here
+        // You can redirect to a payment page orperform any other action
+
+        // Clear the cart after checkout
+        cart = [];
+        localStorage.removeItem("cart");
+        renderCartItems();
+      }
+
+      // Add event listener to the checkout button
+      const checkoutButton = document.getElementById("checkout-button");
+
+
+      // Initial rendering of cart items
+      renderCartItems();
+    </script>
+
+
+
+    <script>
+      // Lấy tham chiếu đến nút button
+      var paymentButton = document.getElementById("paymentButton");
+
+      // Thêm sự kiện click
+      paymentButton.addEventListener("click", function () {
+        // Chuyển hướng đến trang thanh toán
+        window.location.href = "pay.html";
+      });
+    </script>
   </div>
+  <footer class="footer">
+
+
+    <div class="session-three">
+
+      <div id="containerFooter">
+
+        <div id="webFooter">
+          <h3> FASHION KIDS </h3>
+          <p> GIRLS </p>
+          <p> BOYS </p>
+
+        </div>
+        <div id="webFooter">
+          <h3> Liên kết </h3>
+          <p> Trang chủ </p>
+          <p> Về chúng tôi </p>
+          <p> Liên hệ </p>
+        </div>
+        <div id="webFooter">
+          <h3> Hợp Tác </h3>
+          <p> Thanh Tùng </p>
+          <p> Phan Anh </p>
+          <p> Bích Liễu </p>
+          <p> Thanh Long </p>
+
+        </div>
+        <div id="webFooter">
+          <h3> Địa chỉ </h3>
+          <p> 495 Tôn Đức Thắng, Hòa Khánh Bắc, Đà Nẵng</p>
+        </div>
+      </div>
+    </div>
+
+
+  </footer>
 </body>
 
 </html>

@@ -510,6 +510,24 @@ input[type="text"]::placeholder {
   background-color: #c994ae;
 }
 
+.transport-button {
+  background-color: #D3B1C2;
+  color: black;
+  margin: 30px;
+  margin-left: 60px;
+  border: none;
+  padding: 20px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.transport-button:hover {
+  background-color: #c994ae;
+}
+
 table {
   width: 100%;
   text-align: center;
@@ -518,20 +536,76 @@ table {
 
 table th,
 table td {
-  border: 1px solid #ddd;
+  border: 1px solid black;
   padding: 8px;
 }
 
-table th {
-  background-color: #F0F1E8;
+table thead th {
+  background-color: #D3B1C2;
+  color: black;
+}
+
+table tfoot td {
   font-weight: bold;
-  font-size: 16px;
 }
 
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+table tfoot td[colspan="5"] {
+  text-align: center;
 }
 
-table tr:hover {
-  background-color: #e9e9e9;
+
+
+.thongtinthanhtoan {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.thongtinthanhtoan ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.thongtinthanhtoan li {
+  padding: 20px;
+  font-weight: bold;
+}
+
+
+.hinhthuchanhtoan {
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: #f3e4eb;
+  text-align: center;
+}
+
+.hinhthuchanhtoan h3 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-check {
+  margin-bottom: 10px;
+}
+
+.form-check input[type="radio"] {
+  margin-right: 5px;
+}
+
+.btn-success-pttt {
+  background-color: #28a745;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.form-check {
+  display: inline-block;
+  margin-right: 20px;
 }
